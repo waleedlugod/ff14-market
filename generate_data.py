@@ -3,9 +3,10 @@ import json
 from pymongo import *
 from dotenv import load_dotenv
 import requests as r
+from datetime import datetime
 
 
-ITEM_TYPES_CNT = 100
+ITEM_TYPES_CNT = 2
 
 # query for marketable items
 item_types = [
@@ -20,24 +21,46 @@ item_names = {
     ).json()["rows"]
 }
 
+### GENERATE POSTINGS DATA ###
 # query for the current market board for items
+# res = r.get(
+#     f"https://universalis.app/api/v2/Excalibur/{','.join(item_types)}?fields=itemID,items.listings.pricePerUnit,items.listings.quantity,items.listings.retainerCity,items.listings.retainerName,items.currentAveragePrice,items.averagePrice,items.minPrice,items.maxPrice"
+# ).json()
+
+# # create document
+# postings = []
+# for item in res["items"]:
+#     for listing in res["items"][item]["listings"]:
+#         document = {
+#             "itemName": item_names[item],
+#             "itemPrice": listing["pricePerUnit"],
+#             "itemQuantity": listing["quantity"],
+#         }
+#         postings.append(document)
+# f = open("postings.json", "w")
+# json.dump(postings, f)
+
+### GENERATE POSTINGS HISTORY DATA ###
+# query for recent sales history
+# TODO: use entriesUntil past month/week
 res = r.get(
-    f"https://universalis.app/api/v2/Excalibur/{','.join(item_types)}?fields=itemID,items.listings.pricePerUnit,items.listings.quantity,items.listings.retainerCity,items.listings.retainerName,items.currentAveragePrice,items.averagePrice,items.minPrice,items.maxPrice"
+    f"https://universalis.app/api/v2/history/Excalibur/{','.join(item_types)}?entriesToReturn=100"
 ).json()
 
-
 # create document
-postings = []
+history = []
 for item in res["items"]:
-    for listing in res["items"][item]["listings"]:
+    for entry in res["items"][item]["entries"]:
         document = {
+            "timestamp": datetime.fromtimestamp(entry["timestamp"]).isoformat(),
             "itemName": item_names[item],
-            "itemPrice": listing["pricePerUnit"],
-            "itemQuantity": listing["quantity"],
+            "itemPrice": entry["pricePerUnit"],
+            "amountSold": entry["quantity"],
+            "userCustomer": entry["buyerName"],
         }
-        postings.append(document)
-f = open("postings.json", "w")
-json.dump(postings, f)
+        history.append(document)
+f = open("history.json", "w")
+json.dump(history, f)
 
 
 # conn = MongoClient(HOST)

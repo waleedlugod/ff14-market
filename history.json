@@ -1,0 +1,709 @@
+[
+  {
+    "timestamp": "2025-11-24T20:35:48",
+    "itemName": "Fire Shard",
+    "itemPrice": 55,
+    "amountSold": 607,
+    "userCustomer": "Kascha Papillon"
+  },
+  {
+    "timestamp": "2025-11-24T14:18:25",
+    "itemName": "Fire Shard",
+    "itemPrice": 65,
+    "amountSold": 2000,
+    "userCustomer": "Suishou Kou"
+  },
+  {
+    "timestamp": "2025-11-24T14:18:23",
+    "itemName": "Fire Shard",
+    "itemPrice": 65,
+    "amountSold": 2000,
+    "userCustomer": "Suishou Kou"
+  },
+  {
+    "timestamp": "2025-11-24T14:18:21",
+    "itemName": "Fire Shard",
+    "itemPrice": 65,
+    "amountSold": 2000,
+    "userCustomer": "Suishou Kou"
+  },
+  {
+    "timestamp": "2025-11-24T14:18:19",
+    "itemName": "Fire Shard",
+    "itemPrice": 60,
+    "amountSold": 200,
+    "userCustomer": "Suishou Kou"
+  },
+  {
+    "timestamp": "2025-11-24T14:18:18",
+    "itemName": "Fire Shard",
+    "itemPrice": 60,
+    "amountSold": 240,
+    "userCustomer": "Suishou Kou"
+  },
+  {
+    "timestamp": "2025-11-24T13:17:49",
+    "itemName": "Fire Shard",
+    "itemPrice": 59,
+    "amountSold": 5000,
+    "userCustomer": "Fiyo Fayth"
+  },
+  {
+    "timestamp": "2025-11-24T13:17:48",
+    "itemName": "Fire Shard",
+    "itemPrice": 50,
+    "amountSold": 1800,
+    "userCustomer": "Fiyo Fayth"
+  },
+  {
+    "timestamp": "2025-11-24T00:16:43",
+    "itemName": "Fire Shard",
+    "itemPrice": 63,
+    "amountSold": 2000,
+    "userCustomer": "Flor A'lan"
+  },
+  {
+    "timestamp": "2025-11-24T00:16:26",
+    "itemName": "Fire Shard",
+    "itemPrice": 64,
+    "amountSold": 400,
+    "userCustomer": "Flor A'lan"
+  },
+  {
+    "timestamp": "2025-11-24T00:16:24",
+    "itemName": "Fire Shard",
+    "itemPrice": 63,
+    "amountSold": 120,
+    "userCustomer": "Flor A'lan"
+  },
+  {
+    "timestamp": "2025-11-23T22:49:40",
+    "itemName": "Fire Shard",
+    "itemPrice": 67,
+    "amountSold": 9999,
+    "userCustomer": "Sage Astoria"
+  },
+  {
+    "timestamp": "2025-11-23T15:42:41",
+    "itemName": "Fire Shard",
+    "itemPrice": 63,
+    "amountSold": 9999,
+    "userCustomer": "Trin Aurelie"
+  },
+  {
+    "timestamp": "2025-11-23T15:41:08",
+    "itemName": "Fire Shard",
+    "itemPrice": 64,
+    "amountSold": 500,
+    "userCustomer": "Trin Aurelie"
+  },
+  {
+    "timestamp": "2025-11-23T15:41:05",
+    "itemName": "Fire Shard",
+    "itemPrice": 64,
+    "amountSold": 4000,
+    "userCustomer": "Trin Aurelie"
+  },
+  {
+    "timestamp": "2025-11-23T15:40:59",
+    "itemName": "Fire Shard",
+    "itemPrice": 61,
+    "amountSold": 61,
+    "userCustomer": "Trin Aurelie"
+  },
+  {
+    "timestamp": "2025-11-23T15:40:57",
+    "itemName": "Fire Shard",
+    "itemPrice": 60,
+    "amountSold": 1600,
+    "userCustomer": "Trin Aurelie"
+  },
+  {
+    "timestamp": "2025-11-23T15:19:44",
+    "itemName": "Fire Shard",
+    "itemPrice": 60,
+    "amountSold": 246,
+    "userCustomer": "Kirara K'mari"
+  },
+  {
+    "timestamp": "2025-11-23T15:19:42",
+    "itemName": "Fire Shard",
+    "itemPrice": 55,
+    "amountSold": 200,
+    "userCustomer": "Kirara K'mari"
+  },
+  {
+    "timestamp": "2025-11-23T00:42:18",
+    "itemName": "Fire Shard",
+    "itemPrice": 62,
+    "amountSold": 500,
+    "userCustomer": "Mali Darksidhe"
+  },
+  {
+    "timestamp": "2025-11-23T00:42:16",
+    "itemName": "Fire Shard",
+    "itemPrice": 62,
+    "amountSold": 500,
+    "userCustomer": "Mali Darksidhe"
+  },
+  {
+    "timestamp": "2025-11-23T00:42:12",
+    "itemName": "Fire Shard",
+    "itemPrice": 62,
+    "amountSold": 2000,
+    "userCustomer": "Mali Darksidhe"
+  },
+  {
+    "timestamp": "2025-11-23T00:42:08",
+    "itemName": "Fire Shard",
+    "itemPrice": 60,
+    "amountSold": 990,
+    "userCustomer": "Mali Darksidhe"
+  },
+  {
+    "timestamp": "2025-11-23T00:42:05",
+    "itemName": "Fire Shard",
+    "itemPrice": 60,
+    "amountSold": 1403,
+    "userCustomer": "Mali Darksidhe"
+  },
+  {
+    "timestamp": "2025-11-22T21:19:33",
+    "itemName": "Fire Shard",
+    "itemPrice": 62,
+    "amountSold": 2000,
+    "userCustomer": "Cornelius Avanta"
+  },
+  {
+    "timestamp": "2025-11-22T13:24:16",
+    "itemName": "Fire Shard",
+    "itemPrice": 60,
+    "amountSold": 139,
+    "userCustomer": "Kascha Papillon"
+  },
+  {
+    "timestamp": "2025-11-22T09:01:16",
+    "itemName": "Fire Shard",
+    "itemPrice": 70,
+    "amountSold": 1000,
+    "userCustomer": "Ochimi Chosai"
+  },
+  {
+    "timestamp": "2025-11-22T07:54:02",
+    "itemName": "Fire Shard",
+    "itemPrice": 64,
+    "amountSold": 2000,
+    "userCustomer": "Top Gunner"
+  },
+  {
+    "timestamp": "2025-11-22T07:53:56",
+    "itemName": "Fire Shard",
+    "itemPrice": 64,
+    "amountSold": 4000,
+    "userCustomer": "Top Gunner"
+  },
+  {
+    "timestamp": "2025-11-22T07:53:53",
+    "itemName": "Fire Shard",
+    "itemPrice": 62,
+    "amountSold": 2000,
+    "userCustomer": "Top Gunner"
+  },
+  {
+    "timestamp": "2025-11-22T07:53:50",
+    "itemName": "Fire Shard",
+    "itemPrice": 61,
+    "amountSold": 61,
+    "userCustomer": "Top Gunner"
+  },
+  {
+    "timestamp": "2025-11-22T07:53:48",
+    "itemName": "Fire Shard",
+    "itemPrice": 50,
+    "amountSold": 54,
+    "userCustomer": "Top Gunner"
+  },
+  {
+    "timestamp": "2025-11-22T03:22:03",
+    "itemName": "Fire Shard",
+    "itemPrice": 64,
+    "amountSold": 1000,
+    "userCustomer": "Iren Vieira"
+  },
+  {
+    "timestamp": "2025-11-21T19:33:46",
+    "itemName": "Fire Shard",
+    "itemPrice": 63,
+    "amountSold": 9999,
+    "userCustomer": "Nhaya Telanah"
+  },
+  {
+    "timestamp": "2025-11-21T13:23:29",
+    "itemName": "Fire Shard",
+    "itemPrice": 62,
+    "amountSold": 320,
+    "userCustomer": "Muelsa Muel"
+  },
+  {
+    "timestamp": "2025-11-21T10:39:15",
+    "itemName": "Fire Shard",
+    "itemPrice": 55,
+    "amountSold": 2375,
+    "userCustomer": "Rosaline Hart"
+  },
+  {
+    "timestamp": "2025-11-21T10:29:03",
+    "itemName": "Fire Shard",
+    "itemPrice": 50,
+    "amountSold": 200,
+    "userCustomer": "Otto Luckstone"
+  },
+  {
+    "timestamp": "2025-11-21T05:43:20",
+    "itemName": "Fire Shard",
+    "itemPrice": 64,
+    "amountSold": 1000,
+    "userCustomer": "Aleia Fae"
+  },
+  {
+    "timestamp": "2025-11-21T05:23:37",
+    "itemName": "Fire Shard",
+    "itemPrice": 64,
+    "amountSold": 4000,
+    "userCustomer": "Wesley Willis"
+  },
+  {
+    "timestamp": "2025-11-20T17:14:53",
+    "itemName": "Fire Shard",
+    "itemPrice": 64,
+    "amountSold": 1000,
+    "userCustomer": "Aella Starling"
+  },
+  {
+    "timestamp": "2025-11-20T16:49:40",
+    "itemName": "Fire Shard",
+    "itemPrice": 63,
+    "amountSold": 9999,
+    "userCustomer": "Kina Pear"
+  },
+  {
+    "timestamp": "2025-11-20T16:39:33",
+    "itemName": "Fire Shard",
+    "itemPrice": 63,
+    "amountSold": 9999,
+    "userCustomer": "Kina Pear"
+  },
+  {
+    "timestamp": "2025-11-20T14:41:23",
+    "itemName": "Fire Shard",
+    "itemPrice": 50,
+    "amountSold": 65,
+    "userCustomer": "Yakira Yulin"
+  },
+  {
+    "timestamp": "2025-11-20T14:41:12",
+    "itemName": "Fire Shard",
+    "itemPrice": 50,
+    "amountSold": 195,
+    "userCustomer": "Yakira Yulin"
+  },
+  {
+    "timestamp": "2025-11-20T14:40:57",
+    "itemName": "Fire Shard",
+    "itemPrice": 50,
+    "amountSold": 248,
+    "userCustomer": "Yakira Yulin"
+  },
+  {
+    "timestamp": "2025-11-20T14:40:32",
+    "itemName": "Fire Shard",
+    "itemPrice": 55,
+    "amountSold": 1900,
+    "userCustomer": "Yakira Yulin"
+  },
+  {
+    "timestamp": "2025-11-20T14:40:10",
+    "itemName": "Fire Shard",
+    "itemPrice": 49,
+    "amountSold": 75,
+    "userCustomer": "Yakira Yulin"
+  },
+  {
+    "timestamp": "2025-11-20T05:00:38",
+    "itemName": "Fire Shard",
+    "itemPrice": 64,
+    "amountSold": 4000,
+    "userCustomer": "Smokey Mcpot"
+  },
+  {
+    "timestamp": "2025-11-20T04:07:10",
+    "itemName": "Fire Shard",
+    "itemPrice": 64,
+    "amountSold": 4000,
+    "userCustomer": "Taco Taco"
+  },
+  {
+    "timestamp": "2025-11-20T04:07:08",
+    "itemName": "Fire Shard",
+    "itemPrice": 63,
+    "amountSold": 2000,
+    "userCustomer": "Taco Taco"
+  },
+  {
+    "timestamp": "2025-11-20T02:35:17",
+    "itemName": "Fire Shard",
+    "itemPrice": 61,
+    "amountSold": 118,
+    "userCustomer": "Nanako Oronir"
+  },
+  {
+    "timestamp": "2025-11-20T02:35:16",
+    "itemName": "Fire Shard",
+    "itemPrice": 60,
+    "amountSold": 423,
+    "userCustomer": "Nanako Oronir"
+  },
+  {
+    "timestamp": "2025-11-19T10:15:26",
+    "itemName": "Fire Shard",
+    "itemPrice": 65,
+    "amountSold": 1202,
+    "userCustomer": "Honora Saintrelmaux"
+  },
+  {
+    "timestamp": "2025-11-19T09:39:39",
+    "itemName": "Fire Shard",
+    "itemPrice": 60,
+    "amountSold": 231,
+    "userCustomer": "Lee Freeman"
+  },
+  {
+    "timestamp": "2025-11-19T03:53:58",
+    "itemName": "Fire Shard",
+    "itemPrice": 66,
+    "amountSold": 1600,
+    "userCustomer": "Elwyn Meadowlark"
+  },
+  {
+    "timestamp": "2025-11-19T03:53:57",
+    "itemName": "Fire Shard",
+    "itemPrice": 65,
+    "amountSold": 300,
+    "userCustomer": "Elwyn Meadowlark"
+  },
+  {
+    "timestamp": "2025-11-19T00:34:59",
+    "itemName": "Fire Shard",
+    "itemPrice": 60,
+    "amountSold": 500,
+    "userCustomer": "Grelyn Shimiki"
+  },
+  {
+    "timestamp": "2025-11-18T08:25:03",
+    "itemName": "Fire Shard",
+    "itemPrice": 65,
+    "amountSold": 3000,
+    "userCustomer": "Shaiel Zafina"
+  },
+  {
+    "timestamp": "2025-11-18T08:25:01",
+    "itemName": "Fire Shard",
+    "itemPrice": 63,
+    "amountSold": 1443,
+    "userCustomer": "Shaiel Zafina"
+  },
+  {
+    "timestamp": "2025-11-18T08:07:17",
+    "itemName": "Fire Shard",
+    "itemPrice": 64,
+    "amountSold": 2000,
+    "userCustomer": "Severyn Primordia"
+  },
+  {
+    "timestamp": "2025-11-18T03:58:28",
+    "itemName": "Fire Shard",
+    "itemPrice": 70,
+    "amountSold": 1000,
+    "userCustomer": "Ti'ana Goa'te"
+  },
+  {
+    "timestamp": "2025-11-18T01:19:14",
+    "itemName": "Fire Shard",
+    "itemPrice": 62,
+    "amountSold": 1488,
+    "userCustomer": "Ryanne Twobee"
+  },
+  {
+    "timestamp": "2025-11-18T01:19:11",
+    "itemName": "Fire Shard",
+    "itemPrice": 55,
+    "amountSold": 1952,
+    "userCustomer": "Ryanne Twobee"
+  },
+  {
+    "timestamp": "2025-11-18T01:19:08",
+    "itemName": "Fire Shard",
+    "itemPrice": 55,
+    "amountSold": 2222,
+    "userCustomer": "Ryanne Twobee"
+  },
+  {
+    "timestamp": "2025-11-24T06:49:37",
+    "itemName": "Ice Shard",
+    "itemPrice": 66,
+    "amountSold": 120,
+    "userCustomer": "Mali Darksidhe"
+  },
+  {
+    "timestamp": "2025-11-24T06:49:35",
+    "itemName": "Ice Shard",
+    "itemPrice": 60,
+    "amountSold": 200,
+    "userCustomer": "Mali Darksidhe"
+  },
+  {
+    "timestamp": "2025-11-24T06:49:33",
+    "itemName": "Ice Shard",
+    "itemPrice": 60,
+    "amountSold": 400,
+    "userCustomer": "Mali Darksidhe"
+  },
+  {
+    "timestamp": "2025-11-23T22:49:44",
+    "itemName": "Ice Shard",
+    "itemPrice": 68,
+    "amountSold": 9999,
+    "userCustomer": "Sage Astoria"
+  },
+  {
+    "timestamp": "2025-11-23T22:48:08",
+    "itemName": "Ice Shard",
+    "itemPrice": 67,
+    "amountSold": 2000,
+    "userCustomer": "Sage Astoria"
+  },
+  {
+    "timestamp": "2025-11-23T08:21:06",
+    "itemName": "Ice Shard",
+    "itemPrice": 67,
+    "amountSold": 500,
+    "userCustomer": "Trin Aurelie"
+  },
+  {
+    "timestamp": "2025-11-23T08:21:02",
+    "itemName": "Ice Shard",
+    "itemPrice": 67,
+    "amountSold": 2400,
+    "userCustomer": "Trin Aurelie"
+  },
+  {
+    "timestamp": "2025-11-23T08:21:01",
+    "itemName": "Ice Shard",
+    "itemPrice": 66,
+    "amountSold": 66,
+    "userCustomer": "Trin Aurelie"
+  },
+  {
+    "timestamp": "2025-11-23T08:20:59",
+    "itemName": "Ice Shard",
+    "itemPrice": 65,
+    "amountSold": 2000,
+    "userCustomer": "Trin Aurelie"
+  },
+  {
+    "timestamp": "2025-11-23T08:20:56",
+    "itemName": "Ice Shard",
+    "itemPrice": 63,
+    "amountSold": 462,
+    "userCustomer": "Trin Aurelie"
+  },
+  {
+    "timestamp": "2025-11-23T08:20:55",
+    "itemName": "Ice Shard",
+    "itemPrice": 63,
+    "amountSold": 500,
+    "userCustomer": "Trin Aurelie"
+  },
+  {
+    "timestamp": "2025-11-23T08:20:53",
+    "itemName": "Ice Shard",
+    "itemPrice": 63,
+    "amountSold": 1600,
+    "userCustomer": "Trin Aurelie"
+  },
+  {
+    "timestamp": "2025-11-23T00:58:20",
+    "itemName": "Ice Shard",
+    "itemPrice": 64,
+    "amountSold": 1000,
+    "userCustomer": "Ochimi Chosai"
+  },
+  {
+    "timestamp": "2025-11-22T15:00:26",
+    "itemName": "Ice Shard",
+    "itemPrice": 60,
+    "amountSold": 33,
+    "userCustomer": "Verdha Tashon"
+  },
+  {
+    "timestamp": "2025-11-22T15:00:24",
+    "itemName": "Ice Shard",
+    "itemPrice": 60,
+    "amountSold": 90,
+    "userCustomer": "Verdha Tashon"
+  },
+  {
+    "timestamp": "2025-11-22T15:00:22",
+    "itemName": "Ice Shard",
+    "itemPrice": 60,
+    "amountSold": 1000,
+    "userCustomer": "Verdha Tashon"
+  },
+  {
+    "timestamp": "2025-11-22T15:00:21",
+    "itemName": "Ice Shard",
+    "itemPrice": 59,
+    "amountSold": 5000,
+    "userCustomer": "Verdha Tashon"
+  },
+  {
+    "timestamp": "2025-11-22T07:54:11",
+    "itemName": "Ice Shard",
+    "itemPrice": 68,
+    "amountSold": 9999,
+    "userCustomer": "Top Gunner"
+  },
+  {
+    "timestamp": "2025-11-22T06:43:24",
+    "itemName": "Ice Shard",
+    "itemPrice": 69,
+    "amountSold": 4000,
+    "userCustomer": "Mao Meow"
+  },
+  {
+    "timestamp": "2025-11-22T05:56:33",
+    "itemName": "Ice Shard",
+    "itemPrice": 67,
+    "amountSold": 2000,
+    "userCustomer": "Mighty Mu"
+  },
+  {
+    "timestamp": "2025-11-22T05:54:06",
+    "itemName": "Ice Shard",
+    "itemPrice": 66,
+    "amountSold": 66,
+    "userCustomer": "Mighty Mu"
+  },
+  {
+    "timestamp": "2025-11-21T22:43:30",
+    "itemName": "Ice Shard",
+    "itemPrice": 69,
+    "amountSold": 4000,
+    "userCustomer": "Smokey Mcpot"
+  },
+  {
+    "timestamp": "2025-11-21T19:38:13",
+    "itemName": "Ice Shard",
+    "itemPrice": 64,
+    "amountSold": 2000,
+    "userCustomer": "Top Gunner"
+  },
+  {
+    "timestamp": "2025-11-21T14:14:04",
+    "itemName": "Ice Shard",
+    "itemPrice": 250,
+    "amountSold": 100,
+    "userCustomer": "Drako Dragonbane"
+  },
+  {
+    "timestamp": "2025-11-21T04:13:35",
+    "itemName": "Ice Shard",
+    "itemPrice": 64,
+    "amountSold": 2000,
+    "userCustomer": "Cornelius Avanta"
+  },
+  {
+    "timestamp": "2025-11-21T04:13:33",
+    "itemName": "Ice Shard",
+    "itemPrice": 65,
+    "amountSold": 55,
+    "userCustomer": "Cornelius Avanta"
+  },
+  {
+    "timestamp": "2025-11-20T04:00:04",
+    "itemName": "Ice Shard",
+    "itemPrice": 50,
+    "amountSold": 7,
+    "userCustomer": "Rea Tarpl"
+  },
+  {
+    "timestamp": "2025-11-19T12:43:10",
+    "itemName": "Ice Shard",
+    "itemPrice": 63,
+    "amountSold": 2000,
+    "userCustomer": "Taco Taco"
+  },
+  {
+    "timestamp": "2025-11-19T10:59:33",
+    "itemName": "Ice Shard",
+    "itemPrice": 64,
+    "amountSold": 1600,
+    "userCustomer": "Ariel Triton"
+  },
+  {
+    "timestamp": "2025-11-19T10:01:43",
+    "itemName": "Ice Shard",
+    "itemPrice": 65,
+    "amountSold": 2000,
+    "userCustomer": "Fivegiven Fervour"
+  },
+  {
+    "timestamp": "2025-11-19T00:35:06",
+    "itemName": "Ice Shard",
+    "itemPrice": 50,
+    "amountSold": 1000,
+    "userCustomer": "Grelyn Shimiki"
+  },
+  {
+    "timestamp": "2025-11-19T00:26:05",
+    "itemName": "Ice Shard",
+    "itemPrice": 10,
+    "amountSold": 200,
+    "userCustomer": "Viceroi Cathartes"
+  },
+  {
+    "timestamp": "2025-11-18T13:12:09",
+    "itemName": "Ice Shard",
+    "itemPrice": 65,
+    "amountSold": 1000,
+    "userCustomer": "Ba Tata"
+  },
+  {
+    "timestamp": "2025-11-18T03:45:41",
+    "itemName": "Ice Shard",
+    "itemPrice": 70,
+    "amountSold": 2000,
+    "userCustomer": "Stormy Skyesong"
+  },
+  {
+    "timestamp": "2025-11-18T03:45:33",
+    "itemName": "Ice Shard",
+    "itemPrice": 67,
+    "amountSold": 114,
+    "userCustomer": "Stormy Skyesong"
+  },
+  {
+    "timestamp": "2025-11-18T03:45:32",
+    "itemName": "Ice Shard",
+    "itemPrice": 65,
+    "amountSold": 2400,
+    "userCustomer": "Stormy Skyesong"
+  },
+  {
+    "timestamp": "2025-11-18T03:45:30",
+    "itemName": "Ice Shard",
+    "itemPrice": 64,
+    "amountSold": 2000,
+    "userCustomer": "Stormy Skyesong"
+  }
+]
