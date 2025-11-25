@@ -1,12 +1,10 @@
-import os
 import json
-from pymongo import *
-from dotenv import load_dotenv
 import requests as r
 from datetime import datetime
 
 
-ITEM_TYPES_CNT = 2
+ITEM_TYPES_CNT = 100
+SALES_ENTRIES_CNT = 1000
 
 # query for marketable items
 item_types = [
@@ -21,52 +19,52 @@ item_names = {
     ).json()["rows"]
 }
 
-### GENERATE POSTINGS DATA ###
-# query for the current market board for items
-# res = r.get(
-#     f"https://universalis.app/api/v2/Excalibur/{','.join(item_types)}?fields=itemID,items.listings.pricePerUnit,items.listings.quantity,items.listings.retainerCity,items.listings.retainerName,items.currentAveragePrice,items.averagePrice,items.minPrice,items.maxPrice"
-# ).json()
 
-# # create document
-# postings = []
-# for item in res["items"]:
-#     for listing in res["items"][item]["listings"]:
-#         document = {
-#             "itemName": item_names[item],
-#             "itemPrice": listing["pricePerUnit"],
-#             "itemQuantity": listing["quantity"],
-#         }
-#         postings.append(document)
-# f = open("postings.json", "w")
-# json.dump(postings, f)
+# generate postings data
+def generate_postings():
+    # query for the current market board for items
+    res = r.get(
+        f"https://universalis.app/api/v2/Excalibur/{','.join(item_types)}?fields=itemID,items.listings.pricePerUnit,items.listings.quantity,items.listings.retainerCity,items.listings.retainerName,items.currentAveragePrice,items.averagePrice,items.minPrice,items.maxPrice"
+    ).json()
 
-### GENERATE POSTINGS HISTORY DATA ###
-# query for recent sales history
-# TODO: use entriesUntil past month/week
-res = r.get(
-    f"https://universalis.app/api/v2/history/Excalibur/{','.join(item_types)}?entriesToReturn=100"
-).json()
-
-# create document
-history = []
-for item in res["items"]:
-    for entry in res["items"][item]["entries"]:
-        document = {
-            "timestamp": datetime.fromtimestamp(entry["timestamp"]).isoformat(),
-            "itemName": item_names[item],
-            "itemPrice": entry["pricePerUnit"],
-            "amountSold": entry["quantity"],
-            "userCustomer": entry["buyerName"],
-        }
-        history.append(document)
-f = open("history.json", "w")
-json.dump(history, f)
+    # create document
+    postings = []
+    for item in res["items"]:
+        for listing in res["items"][item]["listings"]:
+            document = {
+                "itemName": item_names[item],
+                "itemPrice": listing["pricePerUnit"],
+                "itemQuantity": listing["quantity"],
+            }
+            postings.append(document)
+    f = open("postings.json", "w")
+    json.dump(postings, f)
 
 
-# conn = MongoClient(HOST)
-# db = conn["market"]
+# generate postings history data
+def generate_sales():
+    # query for recent sales history
+    # past_month = datetime(datetime.now().year, datetime.now().month - 1, 1)
+    res = r.get(
+        f"https://universalis.app/api/v2/history/Excalibur/{','.join(item_types)}?entriesToReturn={SALES_ENTRIES_CNT}"
+    ).json()
 
-# postings = db["postings"]
-# postingHistory = db["postingHistory"]
+    # create document
+    history = []
+    for item in res["items"]:
+        for entry in res["items"][item]["entries"]:
+            document = {
+                "timestamp": str(datetime.fromtimestamp(entry["timestamp"])),
+                "itemName": item_names[item],
+                "itemPrice": entry["pricePerUnit"],
+                "amountSold": entry["quantity"],
+                "userCustomer": entry["buyerName"],
+            }
+            history.append(document)
+    f = open("history.json", "w")
+    json.dump(history, f)
 
-# conn.close()
+
+if __name__ == "__main__":
+    generate_postings()
+    generate_sales()
