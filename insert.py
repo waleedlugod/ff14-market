@@ -21,6 +21,59 @@ def delete_many_postings(db, items: dict):
 def delete_history_entry(db, user_entry: dict):
     return db["postingHistory"].delete_one(user_entry)
 
+def add_item(db, username, title, price, quantity):
+    item = {
+        "itemID": str(datetime.now().timestamp()),
+        "username": username,
+        "title": title,
+        "price": price,
+        "quantity": quantity,
+        "timestamp": datetime.now()
+    }
+    return create_posting(db, item)
+
+def update_item(db, username, itemID, title=None, price=None, quantity=None):
+    update_fields = {}
+    if title: 
+        update_fields["title"] = title
+    if price: 
+        update_fields["price"] = price
+    if quantity: 
+        update_fields["quantity"] = quantity
+    return db["postings"].update_one({"itemID": itemID, "username": username}, {"$set": update_fields})
+
+def list_all_items(db):
+    return list(db["postings"].find({"quantity": {"$gt": 0}}).sort("price", 1))
+
+def list_recent_items(db):
+    return list(db["postings"].find({"quantity": {"$gt": 0}}).sort("timestamp", -1))
+
+def list_user_items(db, username):
+    return list(db["postings"].find({"username": username}).sort("timestamp", -1))
+
+def remove_item(db, username, itemID):
+    return delete_posting(db, {"itemID": itemID, "username": username})
+
+def buy_item(db, buyer_username, itemID, quantity):
+    item = db["postings"].find_one({"itemID": itemID, "quantity": {"$gte": quantity}})
+    if not item:
+        return False
+    
+    db["postings"].update_one({"itemID": itemID}, {"$inc": {"quantity": -quantity}})
+
+    history_entry = {
+        "timestamp": datetime.now(),
+        "itemName": item["title"],
+        "itemPrice": item["price"],
+        "amountSold": quantity,
+        "userCustomer": buyer_username
+    }
+    create_history(db, history_entry)
+    return True
+
+def get_sales_history(db):
+    return list(db["postingHistory"].find().sort("timestamp", -1))
+
 if __name__ == "__main__":
     # insert into database
     conn = MongoClient(HOST)
