@@ -53,15 +53,15 @@ python3 MarketBoard.py
 
 ## Pictures
 
-![Selling Items](pictures/img2.png)
+<img src="pictures/img2.png" alt="Selling Items" width="400">
 - Items for sale.
 
-![Trade History Items](pictures/img3.png)
+<img src="pictures/img3.png" alt="Trade History Items" width="400">
 - Trade history by various users.
 
-![Adding entrys](pictures/img4.png)
+<img src="pictures/img4.png" alt="Adding entries" width="400">
 - Creating new entries.
 
-![Adding entrys](pictures/img1.png)
+<img src="pictures/img1.png" alt="Adding entries" width="400">
 - Filter to find items.
 
