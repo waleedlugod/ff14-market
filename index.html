@@ -6,6 +6,7 @@
     <title>MARKET BOARD</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -15,6 +16,12 @@
         <p class="subtitle">CSCI 112 MongoDB Market</p>
     </div>
 </section>
+
+<section class="charts" id="charts">
+    <h2 class="section-title">Analytics</h2>
+    <canvas id="dailyVolumeChart" width="800" height="400"></canvas>
+</section>
+
 
 <section class="features" id="features">
     <h2 class="section-title">Marketplace</h2>
@@ -63,8 +70,7 @@
                         <th>Buyer</th>
                         <th>Price</th>
                         <th>Quantity</th>
-                        <th>Time
-                        </th>
+                        <th>Time</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -77,6 +83,8 @@
 
 <script src="search.js"></script>
 <script src="animation.js"></script>
+<script src="charts.js"></script>
+
 
 <div id="history-modal" class="modal-overlay">
     <div class="modal-content">
