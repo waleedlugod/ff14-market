@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from bson import ObjectId
 import json
 import insert
-from analyticsAgg import daily_trade_volume, item_price_statistics, demand_stability_score
+from analyticsAgg import daily_trade_volume, item_price_statistics, demand_stability_score, price_volatility_index
 
 HOST = "mongodb://localhost:27017"
 
@@ -178,6 +178,22 @@ def api_demand_stability():
     try:
         result = demand_stability_score(item)
         return jsonify(result)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@MarketBoard.route("/price_volatility")
+def get_price_volatility():
+    item = request.args.get("item")
+    if not item:
+        return jsonify({"error": "missing item query parameter"}), 400
+    try:
+        pvi = price_volatility_index(item)
+        try:
+            pvi_val = float(pvi)
+        except Exception:
+            pvi_val = pvi
+        return jsonify({"item": item, "pvi": pvi_val})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

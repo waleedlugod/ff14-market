@@ -1356,6 +1356,7 @@ https://templatemo.com/tm-596-electric-xtra
         }
 
         .analytics-panel {
+            font-family: 'Rajdhani', sans-serif;
             background: #0b0b0b;
             padding: 18px;
             border-radius: 10px;
@@ -1370,6 +1371,7 @@ https://templatemo.com/tm-596-electric-xtra
         }
 
         .chart-canvas {
+            font-family: 'Rajdhani', sans-serif;
             width: 100%;
             height: auto;
             background: #071018;
@@ -1381,7 +1383,7 @@ https://templatemo.com/tm-596-electric-xtra
             display:block;
             margin-bottom:6px;
             color:#fff;
-            font-weight:600;
+            font-weight:400;
         }
 
         .dropdown-select {

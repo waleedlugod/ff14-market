@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     options: {
                         responsive: true,
                         maintainAspectRatio: true,
-                        aspectRatio: 2.9,
+                        aspectRatio: 2,
                         scales: {
                             x: { display: true },
                             y: { beginAtZero: true, title: { display: true, text: 'Std dev (units/day)' } }
@@ -168,4 +168,75 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (err) {
         console.error('stability widget init error', err);
     }
+
+    // Price Volatility widget (single-bar chart per selected item)
+    (async function initPriceVolatilityWidget(){
+        const select = document.getElementById('price-volatility-select');
+        const canvas = document.getElementById('priceVolatilityChart');
+        if (!select || !canvas || typeof fetch !== 'function' || typeof Chart === 'undefined') return;
+
+        // populate items from item_price_stats
+        try {
+            const resItems = await fetch('/item_price_stats');
+            if (!resItems.ok) throw new Error('failed to load items');
+            const items = await resItems.json();
+            select.innerHTML = items.map(i => {
+                const name = i._id ?? i.itemName ?? '';
+                return `<option value="${encodeURIComponent(name)}">${name}</option>`;
+            }).join('');
+        } catch (e) {
+            console.warn('Could not load items for volatility select', e);
+            select.innerHTML = '<option value="">(no items)</option>';
+            return;
+        }
+
+        let pvChart = null;
+        async function renderPriceVol(item) {
+            if (!item) return;
+            try {
+                const q = `?item=${encodeURIComponent(item)}`;
+                const r = await fetch('/price_volatility' + q);
+                if (!r.ok) throw new Error('volatility fetch failed: ' + r.status);
+                const payload = await r.json();
+                const value = payload.pvi == null ? 0 : Number(payload.pvi);
+
+                const ctx = canvas.getContext('2d');
+                if (pvChart) pvChart.destroy();
+                pvChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [payload.item || item],
+                        datasets: [{
+                            label: 'Price Volatility Index (std dev)',
+                            data: [value],
+                            backgroundColor: ['rgba(54,162,235,0.9)'],
+                            borderColor: ['rgba(54,162,235,1)'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        aspectRatio: 2,
+                        scales: {
+                            x: { display: true },
+                            y: { beginAtZero: true, title: { display: true, text: 'PVI (price units)' } }
+                        },
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            } catch (err) {
+                console.error('price volatility render error', err);
+            }
+        }
+
+        // initial render
+        const first = select.options[0]?.value ? decodeURIComponent(select.options[0].value) : select.options[0]?.text;
+        if (first) renderPriceVol(first);
+
+        select.addEventListener('change', () => {
+            const v = select.value ? decodeURIComponent(select.value) : select.options[select.selectedIndex].text;
+            renderPriceVol(v);
+        });
+    })();
 });

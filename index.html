@@ -109,18 +109,23 @@
             </div>
         </div>
     </div>
-    <div class="analytics-panel wide-panel">
-        <h2 class="section-header">Demand Stability</h2>
+    <div class="analytics-row">
+        <div class="analytics-panel">
+            <h2 class="section-header">Demand Stability</h2>
+            <label for="stability-item-select" class="dropdown-label">Select item</label>
+            <select id="stability-item-select" class="dropdown-select"></select>
+            <canvas id="stabilityChart" class="chart-canvas"></canvas>
+        </div>
 
-        <label for="stability-item-select" class="dropdown-label">Select item</label>
-        <select id="stability-item-select" class="dropdown-select"></select>
-
-        <canvas id="stabilityChart" class="chart-canvas"></canvas>
+        <div class="analytics-panel">
+            <h2 class="section-header">Price Volatility Index</h2>
+            <label for="price-volatility-select" class="dropdown-label">Select item</label>
+            <select id="price-volatility-select" class="dropdown-select"></select>
+            <canvas id="priceVolatilityChart" class="chart-canvas"></canvas>
+        </div>
     </div>
 
 </section>
-
-
 
 <script src="/static/search.js"></script>
 <script src="/static/animation.js"></script>
