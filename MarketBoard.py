@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from bson import ObjectId
 import json
 import insert
-from analyticsAgg import compute_sales_summary, daily_trade_volume
+from analyticsAgg import compute_sales_summary, daily_trade_volume, item_price_statistics
 
 HOST = "mongodb://localhost:27017"
 
@@ -164,5 +164,17 @@ def get_daily_volume():
 @MarketBoard.route("/sales_summary")
 def get_sales_summary():
     summary = compute_sales_summary()
-    return jsonify(summary)if __name__ == "__main__":
+    return jsonify(summary)
+
+
+@MarketBoard.route("/item_price_stats")
+def get_item_price_stats():
+    try:
+        stats = item_price_statistics()
+        return jsonify(stats)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+if __name__ == "__main__":
     MarketBoard.run(debug=True)
