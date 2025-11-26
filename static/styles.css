@@ -1334,10 +1334,10 @@ https://templatemo.com/tm-596-electric-xtra
 
         #charts {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             flex-wrap: wrap;
             align-items: flex-start;
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -1361,13 +1361,13 @@ https://templatemo.com/tm-596-electric-xtra
             padding: 14px;
             border-radius: 8px;
             width: 100%;
-            max-width: 450px;
+            max-width: 600px;
         }
 
         .sort-arrow {
             display: inline-block;
             margin-left: 4px;
-            width: 10px;
+            width: 5px;
             text-align: center;
         }
 
