@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MARKET BOARD</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h1 class="glitch-text" data-text="MARKET BOARD">MARKET BOARD</h1>
+        <p class="subtitle">CSCI 112 MongoDB Market</p>
+    </div>
+</section>
+
+<section class="features" id="features">
+    <h2 class="section-title">Marketplace</h2>
+
+    <div class="search-filter-bar">
+        <input type="text" id="search-input" placeholder="Search items...">
+        <button class="cta-button cta-secondary" onclick="sortHistoryByTime()" style="margin-left: 6px; font-size: 12px;">
+            Sort
+        </button>
+    </div>
+
+    <div class="features-container">
+
+        <div class="feature-tabs">
+            <div class="tab-item active" data-tab="items-tab">
+                <span class="tab-icon">🛒</span>
+                <span>Items for Sale</span>
+            </div>
+            <div class="tab-item" data-tab="history-tab">
+                <span class="tab-icon">📜</span>
+                <span>Sales History</span>
+            </div>
+        </div>
+
+        <div class="feature-content">
+            <div class="content-panel active" id="items-tab">
+                <table class="items-table">
+                    <thead>
+                        <button class="cta-button cta-primary cta-success" onclick="openItemModal()">Add Item</button>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Purchase</th>
+                        </tr>
+                    </thead>
+                    <tbody id="items-body"></tbody>
+                </table>
+            </div>
+
+            <div class="content-panel" id="history-tab">
+            <table class="history-table">
+                <thead>
+                    <button class="cta-button cta-primary cta-success" onclick="openHistoryModal()">Add History</button>
+                    <tr>
+                        <th>Buyer</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Time
+                        </th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="history-body"></tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="search.js"></script>
+<script src="animation.js"></script>
+
+<div id="history-modal" class="modal-overlay">
+    <div class="modal-content">
+        <h3>Add History Entry</h3>
+        <form id="history-form">
+            <input type="text" id="history-buyer" placeholder="Buyer's Name" required>
+            <input type="text" id="history-item" placeholder="Item Name" required>
+            <input type="number" id="history-price" placeholder="Price" required>
+            <input type="number" id="history-quantity" placeholder="Quantity Sold" required>
+            <div class="modal-buttons">
+                <button type="submit" class="cta-button cta-success">Add</button>
+                <button type="button" class="cta-button cta-danger" id="history-cancel">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="item-modal" class="modal-overlay">
+    <div class="modal-content">
+        <h3>Add Item</h3>
+        <form id="item-form">
+            <input type="text" id="item-username" placeholder="Your Username" required>
+            <input type="text" id="item-name" placeholder="Item Name" required>
+            <input type="number" id="item-price" placeholder="Price" required>
+            <input type="number" id="item-quantity" placeholder="Quantity" required>
+            <div class="modal-buttons">
+                <button type="submit" class="cta-button cta-success">Add</button>
+                <button type="button" class="cta-button cta-danger" id="item-cancel">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
