@@ -2,6 +2,7 @@ from pymongo import MongoClient
 from datetime import datetime, timedelta
 from pymongo.errors import OperationFailure
 from math import *
+import numpy as np
 
 conn = MongoClient("mongodb://localhost:27017")
 db = conn["market"]
@@ -98,7 +99,7 @@ def price_velocity():
     pass
 
 
-def weighted_moving_average():
+def weighted_moving_average(itemName):
     pass
 
 
@@ -115,4 +116,5 @@ def price_acceleration():
 
 
 def demand_stability_score():
-    pass
+    volumes = [day["volume"] for day in daily_trade_volume()]
+    return np.std(volumes)
