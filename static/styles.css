@@ -1320,15 +1320,6 @@ https://templatemo.com/tm-596-electric-xtra
             background: rgba(255, 255, 255, 0.12);
         }
 
-        .sort-arrow {
-            display: inline-block;
-            margin-left: 4px;
-            width: 10px;
-            text-align: center;
-        }
-
-
-        /* Time filter button */
         #time-filter {
             padding: 8px 14px;
             font-size: 13px;
@@ -1337,9 +1328,53 @@ https://templatemo.com/tm-596-electric-xtra
             white-space: nowrap;
         }
 
-        /* Optional hover effect */
         #time-filter:hover {
             opacity: 0.9;
         }
+
+        #charts {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(45deg, #FF5E00, #00B2FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            font-size: 18px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .analytics-panel {
+            background: #0b0b0b;
+            padding: 14px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .sort-arrow {
+            display: inline-block;
+            margin-left: 4px;
+            width: 10px;
+            text-align: center;
+        }
+
+        .chart-canvas {
+            width: 100%;
+            height: auto;
+        }
+
 
 

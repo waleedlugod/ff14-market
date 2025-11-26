@@ -78,25 +78,25 @@
 </section>
 
 <h2 class="section-title">Analytics</h2>
-<section class="charts" id="charts" 
-         style="display:flex; gap:20px; flex-wrap:wrap; align-items:flex-start; max-width:1000px; margin:0 auto;">
+<section class="charts" id="charts">
 
     <div class="analytics-panel">
-        <h2 class="section-title" style="font-size:18px;">Daily Volume Chart</h2>
-        <canvas id="dailyVolumeChart" width="400" height="250" style="width:100%; height:auto;"></canvas>
+        <h2 class="section-header">Daily Volume Chart</h2>
+        <canvas id="dailyVolumeChart" class="chart-canvas" width="400" height="250"></canvas>
     </div>
+
     <div class="analytics-panel">
-        <h2 class="section-title" style="font-size:18px;">Sold Item Price Statistics</h2>
+        <h2 class="section-header">Sold Item Price Statistics</h2>
+
         <div class="table-box">
-            <table class="history-table" id="item-stats-table" 
-                   style="width:100%; border-collapse:collapse; color:#fff; font-size:14px;">
+            <table class="history-table" id="item-stats-table">
                 <thead>
-                    <tr style="text-align:left; border-bottom:1px solid rgba(255,255,255,0.08);">
-                        <th style="padding:6px; cursor:pointer;">Item</th>
-                        <th style="padding:6px; cursor:pointer;">Highest Price</th>
-                        <th style="padding:6px; cursor:pointer;">Lowest Price</th>
-                        <th style="padding:6px; cursor:pointer;">Average Price</th>
-                        <th style="padding:6px; cursor:pointer;">Transactions</th>
+                    <tr>
+                        <th>Item <span class="sort-arrow"></span></th>
+                        <th>Highest Price <span class="sort-arrow"></span></th>
+                        <th>Lowest Price <span class="sort-arrow"></span></th>
+                        <th>Average Price <span class="sort-arrow"></span></th>
+                        <th>Transactions <span class="sort-arrow"></span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -109,6 +109,7 @@
 
     </div>
 </section>
+
 
 
 
