@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from bson import ObjectId
 import json
 import insert
-from aggregations import compute_sales_summary, daily_trade_volume
+from analyticsAgg import compute_sales_summary, daily_trade_volume
 
 HOST = "mongodb://localhost:27017"
 

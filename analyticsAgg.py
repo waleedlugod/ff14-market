@@ -30,10 +30,6 @@ def compute_sales_summary():
 
 
 def daily_trade_volume():
-    """
-    Returns a list of daily trade volumes as dictionaries:
-    [{ "date": "YYYY-MM-DD", "volume": total_quantity_sold }, ...]
-    """
     pipeline = [
         {
             "$group": {
@@ -48,6 +44,5 @@ def daily_trade_volume():
 
     result = list(db["postingHistory"].aggregate(pipeline))
 
-    # Format output
     daily_volumes = [{"date": r["_id"], "volume": r["volume"]} for r in result]
     return daily_volumes
