@@ -30,7 +30,6 @@ def item_price_statistics():
         return []
 
 
-# NEW STATISTICAL FEATURES
 def price_volatility_index(itemName):
     pipeline = [
         {"$match": {"itemName": itemName}},
@@ -71,26 +70,6 @@ def daily_trade_volume():
 
     daily_volumes = [{"date": r["_id"], "volume": r["volume"]} for r in result]
     return daily_volumes
-
-
-def price_velocity():
-    pass
-
-
-def weighted_moving_average(itemName):
-    pass
-
-
-def volume_weight_price_volatility():
-    pass
-
-
-def buy_pressure_index():
-    pass
-
-
-def price_acceleration():
-    pass
 
 
 def demand_stability_score(itemName):
