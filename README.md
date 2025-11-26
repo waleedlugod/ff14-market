@@ -52,3 +52,16 @@ python3 MarketBoard.py
 ---
 
 ## Pictures
+
+![Selling Items](pictures/img2.png)
+- Items for sale.
+
+![Trade History Items](pictures/img3.png)
+- Trade history by various users.
+
+![Adding entrys](pictures/img4.png)
+- Creating new entries.
+
+![Adding entrys](pictures/img1.png)
+- Filter to find items.
+
