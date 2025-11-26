@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from bson import ObjectId
 import json
 import insert
-from analyticsAgg import compute_sales_summary, daily_trade_volume, item_price_statistics
+from analyticsAgg import daily_trade_volume, item_price_statistics
 
 HOST = "mongodb://localhost:27017"
 
@@ -159,12 +159,6 @@ def delete_history_endpoint():
 def get_daily_volume():
     volumes = daily_trade_volume()
     return jsonify(volumes)
-
-
-@MarketBoard.route("/sales_summary")
-def get_sales_summary():
-    summary = compute_sales_summary()
-    return jsonify(summary)
 
 
 @MarketBoard.route("/item_price_stats")
