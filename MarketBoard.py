@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from bson import ObjectId
 import json
 import insert
-from aggregations import compute_sales_summary, daily_trade_volume, price_volatility
+from aggregations import compute_sales_summary, daily_trade_volume
 
 HOST = "mongodb://localhost:27017"
 
@@ -164,57 +164,5 @@ def get_daily_volume():
 @MarketBoard.route("/sales_summary")
 def get_sales_summary():
     summary = compute_sales_summary()
-    return jsonify(summary)
-
-
-@MarketBoard.route("/price_volatility")
-def get_price_volatility():
-    # optional query params: trailing_hours and min_sales
-    try:
-        trailing_hours = int(request.args.get("trailing_hours", 24))
-    except (TypeError, ValueError):
-        trailing_hours = 24
-    try:
-        min_sales = int(request.args.get("min_sales", 2))
-    except (TypeError, ValueError):
-        min_sales = 2
-
-    # compute cutoff for debugging
-    cutoff = datetime.utcnow() - timedelta(hours=trailing_hours)
-
-    # call aggregation
-    volatility = price_volatility(
-        trailing_hours=trailing_hours, min_sales=min_sales)
-
-    # if empty, return debug information to help diagnose
-    if not volatility:
-        # count matching documents in the time window
-        matches = db["postingHistory"].count_documents(
-            {"timestamp": {"$gte": cutoff}})
-        # return a small sample of documents in that window (convert timestamps to ISO)
-        sample_cursor = db["postingHistory"].find(
-            {"timestamp": {"$gte": cutoff}}).limit(10)
-        sample = []
-        for doc in sample_cursor:
-            doc["_id"] = str(doc["_id"])
-            if isinstance(doc.get("timestamp"), datetime):
-                doc["timestamp"] = doc["timestamp"].isoformat()
-            sample.append(doc)
-
-        return jsonify({
-            "volatility": volatility,
-            "debug": {
-                "trailing_hours": trailing_hours,
-                "min_sales": min_sales,
-                "cutoff": cutoff.isoformat(),
-                "matching_docs": matches,
-                "sample": sample,
-                "note": "No volatility rows computed — check timestamps/fields and that there are at least `min_sales` sales per item in the window."
-            }
-        })
-
-    return jsonify(volatility)
-
-
-if __name__ == "__main__":
+    return jsonify(summary)if __name__ == "__main__":
     MarketBoard.run(debug=True)

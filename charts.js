@@ -1,38 +1,3 @@
-document.addEventListener("DOMContentLoaded", async () => {
-    try {
-        const response = await fetch("/daily_volume");
-        const data = await response.json();
-
-        const labels = data.map(d => d.date);
-        const volumes = data.map(d => d.volume);
-
-        const ctx = document.getElementById('dailyVolumeChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Daily Trade Volume',
-                    data: volumes,
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    fill: true,
-                    tension: 0.3
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    x: { title: { display: true, text: 'Date' } },
-                    y: { title: { display: true, text: 'Quantity Sold' }, beginAtZero: true }
-                }
-            }
-        });
-    } catch (err) {
-        console.error("Error fetching chart data:", err);
-    }
-});
-
 document.addEventListener('DOMContentLoaded', () => {
     (async () => {
         try {
