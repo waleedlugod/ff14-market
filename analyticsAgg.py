@@ -8,28 +8,6 @@ conn = MongoClient("mongodb://localhost:27017")
 db = conn["market"]
 
 
-def compute_sales_summary():
-    pipeline = [
-        {
-            "$group": {
-                "_id": "$itemName",
-                "totalSold": {"$sum": "$amountSold"},
-                "totalRevenue": {"$sum": {"$multiply": ["$amountSold", "$itemPrice"]}},
-            }
-        },
-        {"$sort": {"totalSold": -1}},
-    ]
-    results = list(db["postingHistory"].aggregate(pipeline))
-
-    total_sold_all = sum(r["totalSold"] for r in results)
-    for r in results:
-        r["totalSoldPercent"] = (
-            (r["totalSold"] / total_sold_all * 100) if total_sold_all else 0
-        )
-
-    return results
-
-
 def item_price_statistics():
     pipeline = [
         {
@@ -52,7 +30,7 @@ def item_price_statistics():
         return []
 
 
-### NEW STATISTICAL FEATURES
+# NEW STATISTICAL FEATURES
 def price_volatility_index(itemName):
     pipeline = [
         {"$match": {"itemName": itemName}},
