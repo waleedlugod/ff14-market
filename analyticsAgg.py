@@ -7,23 +7,6 @@ conn = MongoClient("mongodb://localhost:27017")
 db = conn["market"]
 
 
-def daily_trade_volume():
-    pipeline = [
-        {
-            "$group": {
-                "_id": {"$dateToString": {"format": "%Y-%m-%d", "date": "$timestamp"}},
-                "volume": {"$sum": "$amountSold"},
-            }
-        },
-        {"$sort": {"_id": 1}},
-    ]
-
-    result = list(db["postingHistory"].aggregate(pipeline))
-
-    daily_volumes = [{"date": r["_id"], "volume": r["volume"]} for r in result]
-    return daily_volumes
-
-
 def compute_sales_summary():
     pipeline = [
         {
