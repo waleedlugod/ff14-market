@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from bson import ObjectId
 import json
 import insert
-from analyticsAgg import daily_trade_volume, item_price_statistics
+from analyticsAgg import daily_trade_volume, item_price_statistics, demand_stability_score
 
 HOST = "mongodb://localhost:27017"
 
@@ -166,6 +166,18 @@ def get_item_price_stats():
     try:
         stats = item_price_statistics()
         return jsonify(stats)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@MarketBoard.route("/demand_stability")
+def api_demand_stability():
+    item = request.args.get("item")
+    if not item:
+        return jsonify({"error": "missing item query parameter"}), 400
+    try:
+        result = demand_stability_score(item)
+        return jsonify(result)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

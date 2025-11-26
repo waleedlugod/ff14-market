@@ -93,6 +93,23 @@ def price_acceleration():
     pass
 
 
-def demand_stability_score():
-    volumes = [day["volume"] for day in daily_trade_volume()]
-    return np.std(volumes)
+def demand_stability_score(itemName):
+    try:
+        pipeline = [
+            {"$match": {"itemName": itemName}},
+            {"$project": {"date": {"$dateToString": {
+                "format": "%Y-%m-%d", "date": "$timestamp"}}, "amountSold": 1}},
+            {"$group": {"_id": "$date", "volume": {"$sum": "$amountSold"}}},
+            {"$sort": {"_id": 1}}
+        ]
+        agg = list(db["postingHistory"].aggregate(pipeline))
+        daily = [{"date": r["_id"], "volume": int(
+            r.get("volume", 0))} for r in agg]
+        if not daily:
+            return {"item": itemName, "score": 0.0, "daily": []}
+        volumes = [d["volume"] for d in daily]
+        score = float(np.std(volumes))
+        return {"item": itemName, "score": score, "daily": daily}
+    except OperationFailure as e:
+        print(f"MongoDB aggregation failed: {e}")
+        return {"item": itemName, "score": 0.0, "daily": []}

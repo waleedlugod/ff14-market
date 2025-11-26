@@ -78,38 +78,47 @@
 </section>
 
 <h2 class="section-title">Analytics</h2>
+
 <section class="charts" id="charts">
-
-    <div class="analytics-panel">
-        <h2 class="section-header">Daily Volume Chart</h2>
-        <canvas id="dailyVolumeChart" class="chart-canvas" width="400" height="250"></canvas>
-    </div>
-
-    <div class="analytics-panel">
-        <h2 class="section-header">Sold Item Price Statistics</h2>
-
-        <div class="table-box">
-            <table class="history-table" id="item-stats-table">
-                <thead>
-                    <tr>
-                        <th>Item <span class="sort-arrow"></span></th>
-                        <th>Highest Price <span class="sort-arrow"></span></th>
-                        <th>Lowest Price <span class="sort-arrow"></span></th>
-                        <th>Average Price <span class="sort-arrow"></span></th>
-                        <th>Transactions <span class="sort-arrow"></span></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Item A</td><td>120</td><td>80</td><td>100</td><td>50</td></tr>
-                    <tr><td>Item B</td><td>200</td><td>150</td><td>175</td><td>30</td></tr>
-                    <tr><td>Item C</td><td>50</td><td>20</td><td>35</td><td>70</td></tr>
-                </tbody>
-            </table>
+    <div class="analytics-row">
+        <div class="analytics-panel">
+            <h2 class="section-header">Daily Volume Chart</h2>
+            <canvas id="dailyVolumeChart" class="chart-canvas"></canvas>
         </div>
 
-    </div>
-</section>
+        <div class="analytics-panel">
+            <h2 class="section-header">Sold Item Price Statistics</h2>
 
+            <div class="table-box">
+                <table class="history-table" id="item-stats-table">
+                    <thead>
+                        <tr>
+                            <th>Item <span class="sort-arrow"></span></th>
+                            <th>Highest Price <span class="sort-arrow"></span></th>
+                            <th>Lowest Price <span class="sort-arrow"></span></th>
+                            <th>Average Price <span class="sort-arrow"></span></th>
+                            <th>Transactions <span class="sort-arrow"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Item A</td><td>120</td><td>80</td><td>100</td><td>50</td></tr>
+                        <tr><td>Item B</td><td>200</td><td>150</td><td>175</td><td>30</td></tr>
+                        <tr><td>Item C</td><td>50</td><td>20</td><td>35</td><td>70</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="analytics-panel wide-panel">
+        <h2 class="section-header">Demand Stability</h2>
+
+        <label for="stability-item-select" class="dropdown-label">Select item</label>
+        <select id="stability-item-select" class="dropdown-select"></select>
+
+        <canvas id="stabilityChart" class="chart-canvas"></canvas>
+    </div>
+
+</section>
 
 
 

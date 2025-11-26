@@ -98,4 +98,74 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (err) {
         console.error('table sort init error:', err);
     }
+
+    try {
+        const select = document.getElementById('stability-item-select');
+        const canvas = document.getElementById('stabilityChart');
+        if (!select || !canvas || typeof fetch !== 'function' || typeof Chart === 'undefined') return;
+
+        // populate items from item_price_stats
+        const resItems = await fetch('/item_price_stats');
+        if (resItems.ok) {
+            const items = await resItems.json();
+            select.innerHTML = items.map(i => {
+                const name = i._id ?? i.itemName ?? '';
+                return `<option value="${encodeURIComponent(name)}">${name}</option>`;
+            }).join('');
+        } else {
+            select.innerHTML = '<option value="">(no items)</option>';
+            return;
+        }
+
+        let stabilityChart = null;
+        async function renderStability(item) {
+            if (!item) return;
+            try {
+                const q = `?item=${encodeURIComponent(item)}`;
+                const r = await fetch('/demand_stability' + q);
+                if (!r.ok) throw new Error('failed to load stability');
+                const payload = await r.json();
+                const value = Number(payload.score || 0);
+
+                const ctx = canvas.getContext('2d');
+                if (stabilityChart) stabilityChart.destroy();
+                stabilityChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [payload.item || item],
+                        datasets: [{
+                            label: 'Demand volatility (std dev)',
+                            data: [value],
+                            backgroundColor: ['#FF5E00'],
+                            borderColor: ['#FF5E00'],
+                            borderWidth: 0.5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        aspectRatio: 2.9,
+                        scales: {
+                            x: { display: true },
+                            y: { beginAtZero: true, title: { display: true, text: 'Std dev (units/day)' } }
+                        },
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            } catch (err) {
+                console.error('stability render error', err);
+            }
+        }
+
+        // initial render
+        const first = select.options[0]?.value ? decodeURIComponent(select.options[0].value) : select.options[0]?.text;
+        if (first) renderStability(first);
+
+        select.addEventListener('change', () => {
+            const v = select.value ? decodeURIComponent(select.value) : select.options[select.selectedIndex].text;
+            renderStability(v);
+        });
+    } catch (err) {
+        console.error('stability widget init error', err);
+    }
 });
