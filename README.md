@@ -47,7 +47,7 @@ brew install mongodb-community@7.0
 python3 MarketBoard.py
 ```
 
-4.  **Now you can drag your index.html into your browser and the data should load.**
+4.  **Now you can drag your index.html into your browser and the data should load. However, don't forget to update the HOST.**
 
 ---
 
