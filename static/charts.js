@@ -4,10 +4,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         Chart.register(...Chart.registerables);
     }
 
-    // Daily volume chart
+    // Daily Volume Chart
     try {
         const canvas = document.getElementById('dailyVolumeChart');
-        if (canvas && typeof fetch === 'function' && typeof Chart !== 'undefined') {
+        if (canvas) {
             const res = await fetch('/daily_volume');
             if (res.ok) {
                 const data = await res.json();
@@ -16,33 +16,49 @@ document.addEventListener('DOMContentLoaded', async () => {
                     const volumes = data.map(d => d.volume);
                     const ctx = canvas.getContext('2d');
                     if (canvas._chartInstance) canvas._chartInstance.destroy();
+
                     canvas._chartInstance = new Chart(ctx, {
                         type: 'line',
-                        data: { labels, datasets: [{ label: 'Daily Trade Volume', data: volumes, borderColor: 'rgba(75,192,192,1)', backgroundColor: 'rgba(75,192,192,0.2)', fill: true, tension: 0.3 }] },
-                        options: { responsive: true, maintainAspectRatio: true, aspectRatio: 2, scales: { x: { title: { display: true, text: 'Date' } }, y: { title: { display: true, text: 'Quantity Sold' }, beginAtZero: true } } }
+                        data: { 
+                            labels, 
+                            datasets: [{
+                                label: 'Daily Trade Volume',
+                                data: volumes,
+                                borderColor: 'rgba(75,192,192,1)',
+                                backgroundColor: 'rgba(75,192,192,0.2)',
+                                fill: true,
+                                tension: 0.3
+                            }]
+                        },
+                        options: { 
+                            responsive: true,
+                            maintainAspectRatio: true,
+                            aspectRatio: 2,
+                            scales: { 
+                                x: { title: { display: true, text: 'Date' } },
+                                y: { title: { display: true, text: 'Quantity Sold' }, beginAtZero: true }
+                            }
+                        }
                     });
                 }
-            } else {
-                console.warn('/daily_volume returned', res.status);
             }
         }
     } catch (err) {
-        console.error('daily volume init error:', err);
+        console.error('Daily volume chart error:', err);
     }
 
-    // Item price stats table renderer
+    // Item Price Stats Table
     try {
         const table = document.getElementById('item-stats-table');
-        if (table && typeof fetch === 'function') {
+        if (table) {
             const tbody = table.querySelector('tbody');
             tbody.innerHTML = `<tr><td colspan="5" style="padding:12px;opacity:0.7;">Loading...</td></tr>`;
-
             const res = await fetch('/item_price_stats');
             if (!res.ok) {
                 tbody.innerHTML = `<tr><td colspan="5" style="padding:12px;color:salmon;">Server error: ${res.status}</td></tr>`;
             } else {
                 const data = await res.json();
-                if (!Array.isArray(data) || data.length === 0) {
+                if (!Array.isArray(data) || !data.length) {
                     tbody.innerHTML = `<tr><td colspan="5" style="padding:12px;opacity:0.7;">No data</td></tr>`;
                 } else {
                     tbody.innerHTML = '';
@@ -68,10 +84,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         }
     } catch (err) {
-        console.error('item stats init error:', err);
+        console.error('Item stats table error:', err);
     }
 
-    // Simple client-side sorting for item-stats table
+    // Simple Table Sorting
     try {
         const table = document.getElementById('item-stats-table');
         if (table) {
@@ -96,15 +112,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         }
     } catch (err) {
-        console.error('table sort init error:', err);
+        console.error('Table sorting error:', err);
     }
 
+    // Demand Stability Chart
     try {
         const select = document.getElementById('stability-item-select');
         const canvas = document.getElementById('stabilityChart');
-        if (!select || !canvas || typeof fetch !== 'function' || typeof Chart === 'undefined') return;
+        if (!select || !canvas) return;
 
-        // populate items from item_price_stats
+        // Populate items
         const resItems = await fetch('/item_price_stats');
         if (resItems.ok) {
             const items = await resItems.json();
@@ -117,6 +134,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
+        // Fetch max for scaling
+        const resMax = await fetch('/demand_stability_max');
+        const maxStability = resMax.ok ? Number((await resMax.json()).max || 1) : 1;
+
         let stabilityChart = null;
         async function renderStability(item) {
             if (!item) return;
@@ -127,6 +148,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const payload = await r.json();
                 const value = Number(payload.score || 0);
 
+                // Min-max log scaling
+                const scaled = Math.log(value + 1) / Math.log(maxStability + 1);
+
                 const ctx = canvas.getContext('2d');
                 if (stabilityChart) stabilityChart.destroy();
                 stabilityChart = new Chart(ctx, {
@@ -134,8 +158,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     data: {
                         labels: [payload.item || item],
                         datasets: [{
-                            label: 'Demand volatility (std dev)',
-                            data: [value],
+                            label: 'Demand Stability (normalized)',
+                            data: [scaled],
                             backgroundColor: ['#FF5E00'],
                             borderColor: ['#FF5E00'],
                             borderWidth: 0.5
@@ -147,17 +171,21 @@ document.addEventListener('DOMContentLoaded', async () => {
                         aspectRatio: 2,
                         scales: {
                             x: { display: true },
-                            y: { beginAtZero: true, title: { display: true, text: 'Std dev (units/day)' } }
+                            y: {
+                                min: 0,
+                                max: 17,
+                                title: { display: true, text: 'Normalized Score' }
+                            }
                         },
                         plugins: { legend: { display: false } }
                     }
                 });
             } catch (err) {
-                console.error('stability render error', err);
+                console.error('Stability render error', err);
             }
         }
 
-        // initial render
+        // Initial render
         const first = select.options[0]?.value ? decodeURIComponent(select.options[0].value) : select.options[0]?.text;
         if (first) renderStability(first);
 
@@ -166,29 +194,29 @@ document.addEventListener('DOMContentLoaded', async () => {
             renderStability(v);
         });
     } catch (err) {
-        console.error('stability widget init error', err);
+        console.error('Stability chart init error:', err);
     }
 
-    // Price Volatility widget (single-bar chart per selected item)
-    (async function initPriceVolatilityWidget(){
+    // Price Volatility Chart
+    (async function initPriceVolatilityWidget() {
         const select = document.getElementById('price-volatility-select');
         const canvas = document.getElementById('priceVolatilityChart');
-        if (!select || !canvas || typeof fetch !== 'function' || typeof Chart === 'undefined') return;
+        if (!select || !canvas) return;
 
-        // populate items from item_price_stats
         try {
             const resItems = await fetch('/item_price_stats');
-            if (!resItems.ok) throw new Error('failed to load items');
-            const items = await resItems.json();
+            const items = resItems.ok ? await resItems.json() : [];
             select.innerHTML = items.map(i => {
                 const name = i._id ?? i.itemName ?? '';
                 return `<option value="${encodeURIComponent(name)}">${name}</option>`;
             }).join('');
         } catch (e) {
-            console.warn('Could not load items for volatility select', e);
             select.innerHTML = '<option value="">(no items)</option>';
             return;
         }
+
+        const resMax = await fetch('/price_volatility_max');
+        const maxPVI = resMax.ok ? Number((await resMax.json()).max || 1) : 1;
 
         let pvChart = null;
         async function renderPriceVol(item) {
@@ -196,9 +224,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             try {
                 const q = `?item=${encodeURIComponent(item)}`;
                 const r = await fetch('/price_volatility' + q);
-                if (!r.ok) throw new Error('volatility fetch failed: ' + r.status);
+                if (!r.ok) throw new Error('failed to load PVI');
                 const payload = await r.json();
                 const value = payload.pvi == null ? 0 : Number(payload.pvi);
+
+                const scaled = Math.log(value + 1) / Math.log(maxPVI + 1);
 
                 const ctx = canvas.getContext('2d');
                 if (pvChart) pvChart.destroy();
@@ -207,8 +237,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     data: {
                         labels: [payload.item || item],
                         datasets: [{
-                            label: 'Price Volatility Index (std dev)',
-                            data: [value],
+                            label: 'Price Volatility Index (normalized)',
+                            data: [scaled],
                             backgroundColor: ['rgba(54,162,235,0.9)'],
                             borderColor: ['rgba(54,162,235,1)'],
                             borderWidth: 1
@@ -220,17 +250,21 @@ document.addEventListener('DOMContentLoaded', async () => {
                         aspectRatio: 2,
                         scales: {
                             x: { display: true },
-                            y: { beginAtZero: true, title: { display: true, text: 'PVI (price units)' } }
+                            y: {
+                                min: 0,
+                                max: 17,
+                                title: { display: true, text: 'Normalized PVI' }
+                            }
                         },
                         plugins: { legend: { display: false } }
                     }
                 });
             } catch (err) {
-                console.error('price volatility render error', err);
+                console.error('Price Volatility render error', err);
             }
         }
 
-        // initial render
+        // Initial render
         const first = select.options[0]?.value ? decodeURIComponent(select.options[0].value) : select.options[0]?.text;
         if (first) renderPriceVol(first);
 
