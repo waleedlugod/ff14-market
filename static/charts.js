@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             y: {
                                 min: 0,
                                 max: 17,
-                                title: { display: true, text: 'Normalized Score (0-1)' }
+                                title: { display: true, text: 'Normalized Score' }
                             }
                         },
                         plugins: { legend: { display: false } }
@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             y: {
                                 min: 0,
                                 max: 17,
-                                title: { display: true, text: 'Normalized PVI (0-1)' }
+                                title: { display: true, text: 'Normalized PVI' }
                             }
                         },
                         plugins: { legend: { display: false } }
