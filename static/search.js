@@ -41,6 +41,12 @@ function fetchItems(searchQuery = "") {
                     <td>${item.itemQuantity || "N/A"}</td>
                     <td>
                         <button class="cta-button cta-secondary"
+                            style="padding: 4px 8px; font-size: 12px; margin-bottom:4px;
+                            margin-left:4px;"
+                            onclick="editItem('${item._id}', '${item.itemName}', 
+                            '${item.itemPrice}', '${item.itemQuantity}')">Update</button><br>
+
+                        <button class="cta-button cta-secondary"
                             style="padding: 4px 8px; font-size: 12px; margin-left: 4px;"
                             onclick="deleteItem('${item._id}')">Delete</button>
                     </td>
@@ -48,6 +54,18 @@ function fetchItems(searchQuery = "") {
                 tbody.appendChild(row);
             });
         });
+}
+
+let editingItemID = null;
+
+function editItem(id, name, price, quantity) {
+    editingItemID = id;
+
+    document.getElementById("item-name").value = name;
+    document.getElementById("item-price").value = price;
+    document.getElementById("item-quantity").value = quantity;
+
+    openItemModal();
 }
 
 function loadHistory() {
@@ -68,6 +86,12 @@ function loadHistory() {
                     <td>${readableTime}</td>
                     <td>
                         <button class="cta-button cta-secondary"
+                                style="padding: 4px 8px; font-size: 12px; margin-bottom:4px;"
+                                onclick="editHistory('${entry._id}', 
+                                '${entry.userCustomer}', '${entry.itemName}', 
+                                '${entry.itemPrice}', '${entry.amountSold}')">Update</button><br>
+
+                        <button class="cta-button cta-secondary"
                             style="padding: 4px 8px; font-size: 12px;"
                             onclick="deleteHistory('${entry._id}')">Delete</button>
                     </td>
@@ -75,6 +99,19 @@ function loadHistory() {
                 tbody.appendChild(row);
             });
         });
+}
+
+let editingHistoryID = null;
+
+function editHistory(id, buyer, itemName, price, amount) {
+    editingHistoryID = id;
+
+    document.getElementById("history-buyer").value = buyer;
+    document.getElementById("history-item").value = itemName;
+    document.getElementById("history-price").value = price;
+    document.getElementById("history-quantity").value = amount;
+
+    openHistoryModal();
 }
 
 function sortHistoryByTime() {
@@ -150,14 +187,32 @@ document.addEventListener("DOMContentLoaded", () => {
         const price = parseFloat(document.getElementById("history-price").value);
         const quantity = parseInt(document.getElementById("history-quantity").value);
 
-        fetch("http://127.0.0.1:5000/add_history", {
+        const payload = {
+            userCustomer: buyer,
+            itemName,
+            itemPrice: price,
+            amountSold: quantity
+        };
+
+        let url = "http://127.0.0.1:5000/add_history";
+    
+        if (editingHistoryID) {
+            payload.entryID = editingHistoryID;
+            url = "http://127.0.0.1:5000/update_history";
+        }
+
+        fetch(url, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({ userCustomer: buyer, itemName, itemPrice: price, amountSold: quantity })
+            body: JSON.stringify(payload)
         })
         .then(res => res.json())
         .then(res => {
-            if(res.success) { loadHistory(); closeHistoryModal(); alert("History entry added!"); }
+            if(res.success) { 
+                loadHistory(); 
+                closeHistoryModal(); 
+                editingHistoryID = null;
+                alert(editingHistoryID ? "Updated!" : "Entry added!"); }
             else alert(res.message);
         });
     });
@@ -177,14 +232,32 @@ document.addEventListener("DOMContentLoaded", () => {
         const price = parseFloat(document.getElementById("item-price").value);
         const quantity = parseInt(document.getElementById("item-quantity").value);
 
-        fetch("http://127.0.0.1:5000/add", {
+        const payload = {
+            username,
+            itemName: name,
+            itemPrice: price,
+            itemQuantity: quantity
+        };
+
+        let url = "http://127.0.0.1:5000/add";
+
+        if (editingItemID) {
+            payload.itemID = editingItemID;
+            url = "http://127.0.0.1:5000/update_item";
+        }
+    
+        fetch(url, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({ username, itemName: name, itemPrice: price, itemQuantity: quantity })
+            body: JSON.stringify(payload)
         })
         .then(res => res.json())
         .then(res => {
-            if(res.success) { fetchItems(); closeItemModal(); alert("Item added!"); }
+            if(res.success) { 
+                fetchItems(); 
+                closeItemModal(); 
+                editingItemID = null;
+                alert(editingItemID ? "Updated!" : "Item added!"); }
             else alert(res.message);
         });
     });
