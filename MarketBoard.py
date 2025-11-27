@@ -197,6 +197,50 @@ def get_price_volatility():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@MarketBoard.route("/update_history", methods=["POST"])
+def update_history():
+    data = request.json
+    entryID = data.get("entryID")
+
+    if not entryID:
+        return jsonify({"success": False, "message": "Missing entry ID"}), 400
+
+    update_data = {
+        "userCustomer": data["userCustomer"],
+        "itemName": data["itemName"],
+        "itemPrice": float(data["itemPrice"]),
+        "amountSold": int(data["amountSold"]),
+        "timestamp": datetime.now()   
+    }
+
+    db["postingHistory"].update_one(
+        {"_id": ObjectId(entryID)},
+        {"$set": update_data}
+    )
+
+    return jsonify({"success": True})
+
+@MarketBoard.route("/update_item", methods=["POST"])
+def update_item():
+    data = request.json
+    itemID = data.get("itemID")
+
+    if not itemID:
+        return jsonify({"success": False, "message": "Missing item ID"}), 400
+
+    update_data = {
+        "itemName": data["itemName"],
+        "itemPrice": float(data["itemPrice"]),
+        "itemQuantity": int(data["itemQuantity"]),
+        "timestamp": datetime.now()
+    }
+
+    db["postings"].update_one(
+        {"_id": ObjectId(itemID)},
+        {"$set": update_data}
+    )
+
+    return jsonify({"success": True})
 
 if __name__ == "__main__":
     MarketBoard.run(debug=True)
