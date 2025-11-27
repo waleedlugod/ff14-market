@@ -1,10 +1,11 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from pymongo import MongoClient
-from datetime import datetime
+from datetime import datetime, timedelta
 from bson import ObjectId
 import json
 import insert
+from analyticsAgg import daily_trade_volume, item_price_statistics, demand_stability_score, price_volatility_index
 
 HOST = "mongodb://localhost:27017"
 
@@ -13,6 +14,12 @@ CORS(MarketBoard)
 
 conn = MongoClient(HOST)
 db = conn["market"]
+
+
+@MarketBoard.route("/")
+def home():
+    return send_from_directory('.', 'index.html')
+
 
 def load_data():
     if "postings" not in db.list_collection_names():
@@ -29,7 +36,9 @@ def load_data():
         ]
         db["postingHistory"].insert_many(sales_history)
 
+
 load_data()
+
 
 @MarketBoard.route("/postings")
 def get_items():
@@ -43,12 +52,13 @@ def get_items():
     else:
         items = list(db["postings"].find({"itemQuantity": {"$gt": 0}}))
 
-    #items = list(db["postings"].find())
+    # items = list(db["postings"].find())
     for i in items:
         i["_id"] = str(i["_id"])
         if isinstance(i.get("timestamp"), datetime):
             i["timestamp"] = i["timestamp"].isoformat()
     return jsonify(items)
+
 
 @MarketBoard.route("/history")
 def get_history():
@@ -59,6 +69,7 @@ def get_history():
             h["timestamp"] = h["timestamp"].isoformat()
     return jsonify(history)
 
+
 @MarketBoard.route("/buy", methods=["POST"])
 def buy():
     data = request.json
@@ -67,11 +78,13 @@ def buy():
     buyer = data["buyer"]
 
     obj_id = ObjectId(itemID)
-    item = db["postings"].find_one({"_id": obj_id, "quantity": {"$gte": quantity}})
+    item = db["postings"].find_one(
+        {"_id": obj_id, "quantity": {"$gte": quantity}})
     if not item:
         return jsonify({"success": False, "message": "Not enough quantity"}), 400
 
-    db["postings"].update_one({"_id": obj_id}, {"$inc": {"quantity": -quantity}})
+    db["postings"].update_one(
+        {"_id": obj_id}, {"$inc": {"quantity": -quantity}})
     history_entry = {
         "timestamp": datetime.now(),
         "itemName": item["itemName"],
@@ -81,6 +94,7 @@ def buy():
     }
     db["postingHistory"].insert_one(history_entry)
     return jsonify({"success": True})
+
 
 @MarketBoard.route("/add", methods=["POST"])
 def add_item_endpoint():
@@ -96,7 +110,8 @@ def add_item_endpoint():
         return jsonify({"success": True})
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 400
-    
+
+
 @MarketBoard.route("/add_history", methods=["POST"])
 def add_history_endpoint():
     data = request.json
@@ -126,6 +141,7 @@ def delete_item_endpoint():
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 400
 
+
 @MarketBoard.route("/delete_history", methods=["POST"])
 def delete_history_endpoint():
     data = request.json
@@ -137,6 +153,50 @@ def delete_history_endpoint():
         return jsonify({"success": True})
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 400
+
+
+@MarketBoard.route("/daily_volume")
+def get_daily_volume():
+    volumes = daily_trade_volume()
+    return jsonify(volumes)
+
+
+@MarketBoard.route("/item_price_stats")
+def get_item_price_stats():
+    try:
+        stats = item_price_statistics()
+        return jsonify(stats)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@MarketBoard.route("/demand_stability")
+def api_demand_stability():
+    item = request.args.get("item")
+    if not item:
+        return jsonify({"error": "missing item query parameter"}), 400
+    try:
+        result = demand_stability_score(item)
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@MarketBoard.route("/price_volatility")
+def get_price_volatility():
+    item = request.args.get("item")
+    if not item:
+        return jsonify({"error": "missing item query parameter"}), 400
+    try:
+        pvi = price_volatility_index(item)
+        try:
+            pvi_val = float(pvi)
+        except Exception:
+            pvi_val = pvi
+        return jsonify({"item": item, "pvi": pvi_val})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 if __name__ == "__main__":
     MarketBoard.run(debug=True)

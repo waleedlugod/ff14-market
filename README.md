@@ -47,8 +47,15 @@ brew install mongodb-community@7.0
 python3 MarketBoard.py
 ```
 
-4.  **Now you can drag your index.html into your browser and the data should load. However, don't forget to update the HOST.**
+4. **Run Aggregations**
+```
+python3 analyticsAgg.py
+```
 
+5.  **Run on Local Server.**
+```
+ You should get a console report such as * Running on http://127.0.0.1:5000 after starting the Flask app
+```
 ---
 
 ## Pictures

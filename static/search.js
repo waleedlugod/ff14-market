@@ -62,6 +62,7 @@ function loadHistory() {
                 const readableTime = new Date(entry.timestamp).toLocaleString();
                 row.innerHTML = `
                     <td>${entry.userCustomer}</td>
+                    <td>${entry.itemName}</td>
                     <td>${entry.itemPrice}</td>
                     <td>${entry.amountSold}</td>
                     <td>${readableTime}</td>

@@ -16,6 +16,15 @@ https://templatemo.com/tm-596-electric-xtra
             box-sizing: border-box;
         }
 
+        .analytics-panel {
+            background: #0b0b0b;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.08);
+            flex: 1;
+            min-width: 300px;
+        }
+
         body {
             font-family: 'Rajdhani', sans-serif;
             background: #0a0a0a;
@@ -622,6 +631,16 @@ https://templatemo.com/tm-596-electric-xtra
         .tab-icon {
             font-size: 1.5rem;
         }
+
+        .table-box {
+            background: #0b0b0b;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.08);
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
 
         .feature-content {
             background: rgba(255, 255, 255, 0.03);
@@ -1301,7 +1320,6 @@ https://templatemo.com/tm-596-electric-xtra
             background: rgba(255, 255, 255, 0.12);
         }
 
-        /* Time filter button */
         #time-filter {
             padding: 8px 14px;
             font-size: 13px;
@@ -1310,9 +1328,70 @@ https://templatemo.com/tm-596-electric-xtra
             white-space: nowrap;
         }
 
-        /* Optional hover effect */
         #time-filter:hover {
             opacity: 0.9;
         }
 
+        #charts {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
+        .section-header {
+            font-family: 'Orbitron', monospace;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+
+            background: linear-gradient(45deg, #FF5E00, #00B2FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .analytics-panel {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0b0b0b;
+            padding: 18px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 540px;
+            min-height: 320px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            box-shadow: 0 0 12px rgba(0, 255, 255, 0.08);
+        }
+
+        .chart-canvas {
+            font-family: 'Rajdhani', sans-serif;
+            width: 100%;
+            height: auto;
+            background: #071018;
+            border-radius: 6px;
+            padding: 8px;
+        }
+
+        .dropdown-label {
+            display:block;
+            margin-bottom:6px;
+            color:#fff;
+            font-weight:400;
+        }
+
+        .dropdown-select {
+            width: 100%;
+            padding: 6px 8px;
+            border-radius: 6px;
+            background: #0f1a24;
+            color: white;
+            border: 1px solid #1f2e3c;
+            margin-bottom: 14px;
+        }
