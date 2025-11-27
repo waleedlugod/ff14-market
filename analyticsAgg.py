@@ -1,3 +1,4 @@
+from math import sqrt
 from pymongo import MongoClient
 from datetime import datetime, timedelta
 from pymongo.errors import OperationFailure
@@ -42,17 +43,30 @@ def price_volatility_index(itemName):
         },
     ]
     try:
-        agg_stats = list(db["postingHistory"].aggregate(pipeline))[0]
+        agg_stats_list = list(db["postingHistory"].aggregate(pipeline))
+        if not agg_stats_list:
+            return 0.0
+
+        agg_stats = agg_stats_list[0]
+        total_transactions = agg_stats.get("totalTransactions", 0)
+        avg_price = agg_stats.get("averagePrice", 0.0)
+        if total_transactions <= 1:
+            return 0.0
+
         history = list(db["postingHistory"].find({"itemName": itemName}))
-        prices = [entry["itemPrice"] for entry in history]
-        sum = 0
-        for p in prices:
-            sum += (p - agg_stats["averagePrice"]) ** 2
-        pvi = sqrt(sum / (agg_stats["totalTransactions"] - 1))
+        prices = [entry.get("itemPrice", 0)
+                  for entry in history if entry.get("itemPrice") is not None]
+
+        if not prices:
+            return 0.0
+
+        sum_sq_diff = sum((p - avg_price) ** 2 for p in prices)
+        pvi = sqrt(sum_sq_diff / (total_transactions - 1))
         return pvi
+
     except OperationFailure as e:
         print(f"MongoDB aggregation failed: {e}")
-        return []
+        return 0.0
 
 
 def daily_trade_volume():
