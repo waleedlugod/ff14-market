@@ -198,5 +198,41 @@ def get_price_volatility():
         return jsonify({"error": str(e)}), 500
 
 
+@MarketBoard.route("/demand_stability_minmax")
+def api_demand_stability_minmax():
+    try:
+        # Aggregate all items' demand stability scores
+        items = [item["_id"]
+                 for item in db["postingHistory"].distinct("itemName")]
+        scores = [demand_stability_score(item)["score"]
+                  for item in items if item]
+        if not scores:
+            return jsonify({"min": 0, "max": 1})
+        return jsonify({"min": min(scores), "max": max(scores)})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@MarketBoard.route("/price_volatility_minmax")
+def api_price_volatility_minmax():
+    try:
+        # Aggregate all items' PVI
+        items = [item["_id"]
+                 for item in db["postingHistory"].distinct("itemName")]
+        pv_values = []
+        for item in items:
+            pvi = price_volatility_index(item)
+            try:
+                pvi_val = float(pvi)
+            except Exception:
+                pvi_val = 0
+            pv_values.append(pvi_val)
+        if not pv_values:
+            return jsonify({"min": 0, "max": 1})
+        return jsonify({"min": min(pv_values), "max": max(pv_values)})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 if __name__ == "__main__":
     MarketBoard.run(debug=True)
